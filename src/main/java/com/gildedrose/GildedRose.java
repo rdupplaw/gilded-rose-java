@@ -1,16 +1,12 @@
 package com.gildedrose;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 class GildedRose {
     Item[] items;
-    private final List<InventoryItem> inventoryItems;
 
     public GildedRose(Item[] items) {
         this.items = items;
-        this.inventoryItems = Arrays.stream(items).map(this::mapItemToInventoryItem).collect(Collectors.toList());
     }
 
     InventoryItem mapItemToInventoryItem(Item item) {
@@ -27,9 +23,7 @@ class GildedRose {
     }
 
     public void updateQuality() {
-        for (InventoryItem item : inventoryItems) {
-            item.updateQuality();
-        }
+        Arrays.stream(items).map(this::mapItemToInventoryItem).forEach(InventoryItem::updateQuality);
     }
 
     private interface InventoryItem {
